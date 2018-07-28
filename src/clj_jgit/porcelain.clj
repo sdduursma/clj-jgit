@@ -449,11 +449,12 @@
      (gitp/with-identity {:name \"~/.ssh/id_rsa\" :exclusive true}
        (gitp/git-push repo :remote \"daveyarwood\" :tags true))
   "
-  ([^Git repo & {:keys [remote tags]}]
+  ([^Git repo & {:keys [remote tags force]}]
     (as-> repo x
       (.push x)
       (.setRemote x (or remote "origin"))
       (if tags (.setPushTags x) x)
+      (.setForce x force)
       (.call x))))
 
 (defn git-rebase [^Git repo upstream]

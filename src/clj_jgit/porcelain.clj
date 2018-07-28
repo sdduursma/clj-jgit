@@ -456,7 +456,12 @@
       (if tags (.setPushTags x) x)
       (.call x))))
 
-(defn git-rebase [])
+(defn git-rebase [^Git repo upstream]
+  (-> repo
+      (.rebase)
+      (.setUpstream upstream)
+      (.call)))
+
 (defn git-revert [])
 (defn git-rm
   [^Git repo file-pattern]
